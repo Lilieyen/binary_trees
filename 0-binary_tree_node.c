@@ -1,20 +1,23 @@
 #include "binary_trees.h"
 
 /**
- *
+ *binary_tree_node - create a binary tree.
+ *@parent: the parent node.
+ *@value: the new value
+ *Return: the new node.
  */
 
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
 {
-binary_tree_t *tmp, *current, *p; 
+binary_tree_t *tmp, *current, *p;
 
-tmp = (struct binary_tree_t *)malloc(sizeof(binary_tree_t));
+tmp = (binary_tree_t *)malloc(sizeof(binary_tree_t));
 tmp->n = value;
 
 if (!parent)
 {
 parent = tmp;
-return parent;
+return (parent);
 }
 
 current = parent, p = NULL;
@@ -30,19 +33,19 @@ current = current->left;
 if (!current)
 {
 p->left = tmp, tmp->parent = p;
-return tmp;
+return (tmp);
 }
 }
 
-else 
+else
 {
 current = current->right;
 
 if (!current)
 {
 p->right = tmp, tmp->parent = p;
-return tmp;
+return (tmp);
 }
 }
 }
-}  
+}
