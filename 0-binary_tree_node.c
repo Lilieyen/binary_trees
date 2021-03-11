@@ -15,6 +15,8 @@ return (NULL);
 
 tmp->n = value;
 tmp->parent = parent;
+tmp->left = NULL;
+tmp->right = NULL;
 
 return (tmp);
 }
