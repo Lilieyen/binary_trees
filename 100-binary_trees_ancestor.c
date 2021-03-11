@@ -17,7 +17,6 @@ const binary_tree_t *parent_second;
 if (!first || !second)
 return (NULL);
 
-
 parent_first = first;
 parent_second = second;
 
@@ -31,6 +30,21 @@ return ((binary_tree_t *)parent_first);
 parent_second = parent_second->parent;
 }
 parent_first = parent_first->parent;
+}
+
+parent_first = first;
+parent_second = second;
+
+while (parent_second != NULL)
+{
+parent_first = first->parent;
+while (parent_first != NULL)
+{
+if (parent_second == parent_first)
+return ((binary_tree_t *)parent_second);
+parent_first = parent_first->parent;
+}
+parent_second = parent_second->parent;
 }
 
 
