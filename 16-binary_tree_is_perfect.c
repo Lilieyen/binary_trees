@@ -8,52 +8,49 @@
 
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-int depth_l, depth_r;
-
-if (tree == NULL)
-return (0);
-
-if (tree->left == NULL && tree->right == NULL)
-{
-depth_l = binary_tree_depth(tree->left);
-depth_r = binary_tree_depth(tree->right);
-
-if (depth_l == depth_r)
+int d = depth(tree);
+if (is_perfect(tree, d, 0))
 return (1);
-
-}
-
-if ((tree->left) && (tree->right))
-{
-if (binary_tree_is_perfect(tree->left))
-{
-if (binary_tree_is_perfect(tree->right))
-{
-return (depth_l && depth_r);
-}
-}
-}
-
 return (0);
 }
-
 
 /**
- *binary_tree_depth - func that measures the depth of a node in a binary tree
- *@tree: pointer to the node to measure the depth
+ *depth - func that measures the depth of a node in a binary tree
+ *@node: pointer to the node to measure the depth
  *Return: 0 if function is NULL
  */
 
-size_t binary_tree_depth(const binary_tree_t *tree)
+int depth(const binary_tree_t *node)
 {
-	size_t count = 0;
+int d = 0;
+while (node != NULL)
+{
+d++;
+node = node->left;
+}
+return (d);
+}
 
-	if (tree == NULL)
-		return (0);
-	while (tree->parent != NULL)
-	{
-		count++;
-		tree = tree->parent;
-	}
-	return (count);
+/**
+ *is_perfect - func that measures the depth of a node in a binary tree
+ *@tree: pointer to the node to measure the depth
+ *@d: the deapth.
+ *@level: level of the node.
+ *Return: 0 if function is NULL.
+ */
+
+int is_perfect(const binary_tree_t *tree, int d, int level)
+{
+
+if (tree == NULL)
+return (1);
+
+if (tree->left == NULL && tree->right == NULL)
+return (d == level + 1);
+
+if (tree->left == NULL || tree->right == NULL)
+return (0);
+
+return (is_perfect(tree->left, d, level + 1) &&
+is_perfect(tree->right, d, level + 1));
 }
